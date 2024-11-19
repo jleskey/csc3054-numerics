@@ -2,10 +2,12 @@ from sys import argv
 from random import uniform
 from time import perf_counter_ns, process_time_ns
 
+from numpy import float32
+
 smallest = 0
 largest = 256
 
-def print_matrix(matrix: list[list[float]], name: str) -> None:
+def print_matrix(matrix: list[list[float32]], name: str) -> None:
     title = f'Matrix {name}'
     print(title)
     print('=' * len(title))
@@ -19,6 +21,9 @@ def print_matrix(matrix: list[list[float]], name: str) -> None:
         print()
     print()
 
+def random_float32(min: float32, max: float32) -> float32:
+    return float32(uniform(float32(min), float32(max)))
+
 n = int(argv[1] if len(argv) > 1 else 0)
 
 A = []
@@ -30,8 +35,8 @@ for row in range(n):
     B.append([])
     C.append([])
     for column in range(n):
-        A[row].append(uniform(smallest, largest))
-        B[row].append(uniform(smallest, largest))
+        A[row].append(random_float32(smallest, largest))
+        B[row].append(random_float32(smallest, largest))
         C[row].append(0)
 
 start_elapsed = perf_counter_ns()
