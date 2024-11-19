@@ -21,8 +21,8 @@ def print_matrix(matrix: np.ndarray, name: str) -> None:
 
 n = int(argv[1] if len(argv) > 1 else 0)
 
-A = np.random.randint(smallest, largest + 1, size=(n, n))
-B = np.random.randint(smallest, largest + 1, size=(n, n))
+A = np.random.uniform(smallest, largest + 1, size=(n, n)).astype(np.float32)
+B = np.random.uniform(smallest, largest + 1, size=(n, n)).astype(np.float32)
 
 start_elapsed = perf_counter_ns()
 start_cpu = process_time_ns()
