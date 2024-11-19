@@ -39,7 +39,7 @@ start_cpu = process_time_ns()
 for i in range(n):
     for j in range(n):
         for k in range(n):
-            C[i][j] += A[i][k] + B[k][j]
+            C[i][j] += A[i][k] * B[k][j]
 end_cpu = process_time_ns()
 end_elapsed = perf_counter_ns()
 
