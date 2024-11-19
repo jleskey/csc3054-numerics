@@ -2,28 +2,28 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define smallest 0
-#define largest 256
+#define smallest 0.0
+#define largest 256.0
 
-double std_rand();
-int rand_int(int min, int max);
+float std_rand();
+float rand_float(float min, float max);
 
 int main(int argc, char* argv[]) {
     int n = argc > 1 ? atoi(argv[1]) : 0;
 
     srand(time(NULL));
 
-    int** A = (int**) malloc(n * sizeof(int*));
-    int** B = (int**) malloc(n * sizeof(int*));
-    int** C = (int**) malloc(n * sizeof(int*));
+    float** A = (float**) malloc(n * sizeof(float*));
+    float** B = (float**) malloc(n * sizeof(float*));
+    float** C = (float**) malloc(n * sizeof(float*));
 
     for (int i = 0; i < n; i++) {
-        A[i] = (int*) malloc(n * sizeof(int));
-        B[i] = (int*) malloc(n * sizeof(int));
-        C[i] = (int*) malloc(n * sizeof(int));
+        A[i] = (float*) malloc(n * sizeof(float));
+        B[i] = (float*) malloc(n * sizeof(float));
+        C[i] = (float*) malloc(n * sizeof(float));
         for (int j = 0; j < n; j++) {
-            A[i][j] = rand_int(smallest, largest);
-            B[i][j] = rand_int(smallest, largest);
+            A[i][j] = rand_float(smallest, largest);
+            B[i][j] = rand_float(smallest, largest);
             C[i][j] = 0;
         }
     }
@@ -48,10 +48,10 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-double std_rand() {
+float std_rand() {
     return rand() / (RAND_MAX + 1.0);
 }
 
-int rand_int(int min, int max) {
+float rand_float(float min, float max) {
     return min + std_rand() * (max - min + 1);
 }
