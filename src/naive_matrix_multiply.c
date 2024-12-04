@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define smallest 0.0
-#define largest 256.0
+#define smallest 0.0f
+#define largest 256.0f
 
 float std_rand();
 float rand_float(float min, float max);
@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
 }
 
 float std_rand() {
-    return rand() / (RAND_MAX + 1.0);
+    return rand() / (RAND_MAX + 1.0f);
 }
 
 float rand_float(float min, float max) {
