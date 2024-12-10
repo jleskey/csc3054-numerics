@@ -10,12 +10,12 @@ def print_matrix(matrix: np.ndarray, name: str) -> None:
     print(title)
     print('=' * len(title))
 
-    longest_length = max(len(str(column)) for row in matrix for column in row)
+    longest_length = max(len(f'{column:.9f}') for row in matrix for column in row)
 
     for row in matrix:
         for column in row:
-            padded_number = f'{column:>{longest_length}}'
-            print(padded_number, end=' ')
+            padded_number = f'{column:>{longest_length}.9f}'
+            print(padded_number, end='  ')
         print()
     print()
 
