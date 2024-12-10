@@ -1,8 +1,11 @@
 from sys import argv
-from random import uniform
 from time import perf_counter_ns, process_time_ns
 
+# Though ctypes provides a builtin wrapper for the C float type, the one
+# provided by numpy is arguably tidier and more Pythonic, integrating well with
+# other numpy operations. We'll also use the numpy RNG for consistency.
 from numpy import float32
+from numpy.random import uniform
 
 smallest = 0
 largest = 256
@@ -12,17 +15,17 @@ def print_matrix(matrix: list[list[float32]], name: str) -> None:
     print(title)
     print('=' * len(title))
 
-    longest_length = max(len(str(column)) for row in matrix for column in row)
+    longest_length = max(len(f'{column:.9f}') for row in matrix for column in row)
 
     for row in matrix:
         for column in row:
-            padded_number = f'{column:>{longest_length}}'
-            print(padded_number, end=' ')
+            padded_number = f'{column:>{longest_length}.9f}'
+            print(padded_number, end='  ')
         print()
     print()
 
 def random_float32(min: float32, max: float32) -> float32:
-    return float32(uniform(float32(min), float32(max)))
+    return float32(uniform(min, max))
 
 n = int(argv[1] if len(argv) > 1 else 0)
 
@@ -37,7 +40,7 @@ for row in range(n):
     for column in range(n):
         A[row].append(random_float32(smallest, largest))
         B[row].append(random_float32(smallest, largest))
-        C[row].append(0)
+        C[row].append(float32(0))
 
 start_elapsed = perf_counter_ns()
 start_cpu = process_time_ns()
